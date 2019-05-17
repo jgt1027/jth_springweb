@@ -13,6 +13,7 @@ public interface MemberDao {
 
 	List<Member> selectAll(int offset, int count);
 	
-
+	Member selectByLogin(String email, String password);
+	
 int countAll();
 }

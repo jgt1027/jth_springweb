@@ -1,8 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
-<!-- 
-회원 목록
--->
+
 <html>
 <head>
 <base href="${pageContext.request.contextPath }/" />

@@ -15,12 +15,13 @@ import org.springframework.stereotype.Repository;
 public class MemberDaoImplUsingSpringJdbc implements MemberDao {
 	static final String INSERT = "INSERT member(email,password, name) VALUES(?,sha2(?,256),?)";
 	static final String SELECT_ALL="SELECT memberId, email, name, left(cdate,19), cdate FROM member ORDER BY memberId desc LIMIT ?,?";
-	static final String COUNT_ALL="SELECT count(memverId) count FROM member";
+	static final String COUNT_ALL="SELECT count(memberId) count FROM member";
+	static final String SELECT_BY_LOGIN = "SELECT memberId, email, password, name FROM member WHERE (email,password) = (?,sha2(?,256))";
 	
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
-	final RowMapper<Member> memverRowMapper = new BeanPropertyRowMapper<>(Member.class);
+	final RowMapper<Member> memberRowMapper = new BeanPropertyRowMapper<>(Member.class);
 	@Override
 	public Member selectByEmail(String email) {
 		// TODO Auto-generated method stub
@@ -41,7 +42,7 @@ public class MemberDaoImplUsingSpringJdbc implements MemberDao {
 	@Override
 	public List<Member> selectAll(int offset, int count) {
 		// TODO Auto-generated method stub
-		return jdbcTemplate.query(SELECT_ALL,memverRowMapper,offset,count);
+		return jdbcTemplate.query(SELECT_ALL,memberRowMapper,offset,count);
 	}
 
 	@Override
@@ -49,5 +50,8 @@ public class MemberDaoImplUsingSpringJdbc implements MemberDao {
 		// TODO Auto-generated method stub
 		return jdbcTemplate.queryForObject(COUNT_ALL,Integer.class);
 	}
-
+	public Member selectByLogin(String email, String password) {
+		return jdbcTemplate.queryForObject(SELECT_BY_LOGIN, memberRowMapper,
+				email, password);
+}
 }
