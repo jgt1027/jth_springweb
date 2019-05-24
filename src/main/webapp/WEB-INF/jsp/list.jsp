@@ -7,13 +7,14 @@
 <title>회원 목록</title>
 </head>
 <body>
+<%@include file ="/WEB-INF/jsp/header.jsp" %>
 	<p>전체 ${totalCount }건</p>
 	<form action="./app/list">
 		<input type="number" name="page" value="${param.page }" placeholder="페이지"
 			min="1" max="${totalCount / 100 + 1 }" step="1" style="width: 50px;">
 		<button type="submit">조회</button>
 		
-		<a href="./app/register/write"> [글 쓰기]</a>
+		<a href="./app/article/write"> [글 쓰기] </a>
 	</form>
 
 	<table>

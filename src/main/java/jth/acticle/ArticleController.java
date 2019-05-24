@@ -5,15 +5,16 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+
+import jth.chap11.Member;
+
 
 
 @Controller
@@ -22,36 +23,38 @@ public class ArticleController {
 	@Autowired
 	ArticleDao articleDao;
 	
-	static final Logger logger = LogManager.getLogger();
+	Logger logger = LogManager.getLogger();
 	
 	@RequestMapping("/list")
 	public String main() {
 		return "list";
 	}
 	
-	@GetMapping("/register/write")
-	public void write() {
+	@GetMapping("/article/write")
+	public String write(@SessionAttribute("MEMBER") Member member) {
 		logger.info("get write");
+		
+		return "article/write";
 	}
 
-	@PostMapping("/register/write")
-	public void add(Article article) {
-		}
 	
-	@PostMapping("/register/writ")
-	public String finsh(Article article) {
+	@PostMapping("/article/writ")
+	public String finsh(Article article,
+			@SessionAttribute("MEMBER") Member member) {
+	
+		article.setUserId(member.getMemberId());
+		article.setName(member.getName());
 		articleDao.insert(article);
-		logger.info("post write ");
-		return "/register/writ";
+		return "article/writ";
 		}
 	
 	
 	
-	@GetMapping("/register/read")
+	@GetMapping("/article/read")
 	public String read(@RequestParam int articleId,Model model) {
 		Article article = articleDao.getArticle(articleId);
 		model.addAttribute("article",article);
-				return "/register/read";
+				return "article/read";
 		}
 
 	@GetMapping("/list")

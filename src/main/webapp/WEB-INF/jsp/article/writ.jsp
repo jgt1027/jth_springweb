@@ -5,6 +5,7 @@
 <title>작성 완료</title>
 </head>
 <body>
+<%@include file ="/WEB-INF/jsp/header.jsp" %>
 	<p>글이 등록되었습니다.</p>
 	<p>
 		<a href="./app/list">[첫 화면 이동]</a>

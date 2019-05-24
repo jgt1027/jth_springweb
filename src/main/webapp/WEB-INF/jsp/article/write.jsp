@@ -6,7 +6,8 @@
 <title>글 쓰기</title>
 </head>
 <body>
-	<form action="./app/register/writ" method="post">
+<%@include file ="/WEB-INF/jsp/header.jsp" %>
+	<form action="./app/article/writ" method="post">
 		<p>
 			학번 : 2014041064
 		</p>

@@ -4,6 +4,7 @@
 <title>회원가입</title>
 </head>
 <body>
+<%@include file ="/WEB-INF/jsp/header.jsp" %>
 	<p>회원가입을 완료했습니다.</p>
 	<p>
 		<a href="./app/main">[첫 화면 이동]</a>

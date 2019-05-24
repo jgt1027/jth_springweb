@@ -4,6 +4,7 @@
 <title>회원가입</title>
 </head>
 <body>
+<%@include file ="/WEB-INF/jsp/header.jsp" %>
 	<h2>약관</h2>
 	<p>약관 내용</p>
 	<form action="./app/register/step2" method="post">
