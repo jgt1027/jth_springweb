@@ -36,25 +36,53 @@ public class ArticleController {
 		
 		return "article/write";
 	}
-
 	
+	@GetMapping("/article/delete")
+	public String delete2(@RequestParam("articleId") String articleId,Model model
+			,@SessionAttribute("MEMBER") Member member) {
+		Article article = articleDao.getArticle(articleId);
+		if(!member.getMemberId().equals(article.getUserId()))
+			return "redirect:/app/article/read?articleId="+articleId;
+		
+		articleDao.delete(article);
+		return "article/delete";
+	}
 	@PostMapping("/article/writ")
 	public String finsh(Article article,
-			@SessionAttribute("MEMBER") Member member) {
+		@SessionAttribute("MEMBER") Member member) {
 	
 		article.setUserId(member.getMemberId());
 		article.setName(member.getName());
 		articleDao.insert(article);
 		return "article/writ";
 		}
+	@GetMapping("/article/update")
+	public String up(@RequestParam ("articleId")String articleId,Model model,
+			@SessionAttribute("MEMBER") Member member) {
 	
-	
-	
+		Article article = articleDao.getArticle(articleId);
+		if(!member.getMemberId().equals(article.getUserId()))
+			
+			return "redirect:/app/article/read?articleId="+articleId;
+		
+		model.addAttribute("article",article);
+		
+		return "article/update";
+	}
+	@PostMapping("/article/update2")
+	public String updat(Article article,@RequestParam("articleId") String articleId,
+			@SessionAttribute("MEMBER") Member member) {
+		article.setArticleId(articleId);
+		articleDao.update(article);
+		return "/article/update2";
+	}
+
+
 	@GetMapping("/article/read")
-	public String read(@RequestParam int articleId,Model model) {
+	public String read(@RequestParam String articleId,Model model) {
 		Article article = articleDao.getArticle(articleId);
 		model.addAttribute("article",article);
-				return "article/read";
+				return "/article/read";
 		}
 
 	@GetMapping("/list")

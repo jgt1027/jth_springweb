@@ -18,7 +18,8 @@ public class ArticleDaoIp implements ArticleDao {
 	static final String SELECT_ALL="SELECT  articleId, title,userId, name, content, udate FROM article ORDER BY articleId desc LIMIT ?,?";
 	static final String COUNT_ALL="SELECT count(articleId) count FROM article";
 	static final String GET_ARTICLE = "SELECT articleId,userId ,title, content, name, udate FROM article WHERE articleId = ?";
-	
+	static final String DELETE ="delete from article where articleId=?";
+	static final String UPDATE = "update article set title=?, content=? where articleId=?";
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
@@ -33,7 +34,7 @@ public class ArticleDaoIp implements ArticleDao {
 	}
 
 	@Override
-	public Article getArticle(int articleId) {
+	public Article getArticle(String articleId) {
 		// TODO Auto-generated method stub
 		return jdbcTemplate.queryForObject(GET_ARTICLE,
 				articleRowMapper, articleId);
@@ -42,11 +43,22 @@ public class ArticleDaoIp implements ArticleDao {
 	@Override
 	public void insert(Article article) {
 		jdbcTemplate.update(INSERT, article.getTitle(),
-				article.getContent(), "2014041064", "정택환");
+				article.getContent(), article.getUserId(), article.getName());
 		}
 	
 
+	@Override
+	public void delete(Article article) {
+		// TODO Auto-generated method stub
+		jdbcTemplate.update(DELETE,article.getArticleId());
+		
+	}
 
+	@Override
+	public void update(Article article) {
+		// TODO Auto-generated method stub
+		jdbcTemplate.update(UPDATE, article.getTitle(),article.getContent(),article.getArticleId());
+	}
 
 	@Override
 	public int countAll() {

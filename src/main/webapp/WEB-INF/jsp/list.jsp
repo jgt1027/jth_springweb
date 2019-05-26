@@ -33,7 +33,7 @@
 					<td>${article.articleId}</td>
 					<td>${article.userId}</td>
 					<td>${article.name}</td>
-					<td><a href="./app/register/read?articleId=${article.articleId}">${article.title}</a></td>
+					<td><a href="./app/article/read?articleId=${article.articleId}">${article.title}</a></td>
 					<td>${article.udate}</td>
 				</tr>
 			</c:forEach>

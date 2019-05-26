@@ -9,12 +9,6 @@
 <%@include file ="/WEB-INF/jsp/header.jsp" %>
 	<form action="./app/article/writ" method="post">
 		<p>
-			학번 : 2014041064
-		</p>
-		<p>
-			이름 : 정 택 환
-		</p>
-		<p>
 			제목 : <br> <input type="text" name="title" value="${param.title }">
 		</p>
 		<p>
