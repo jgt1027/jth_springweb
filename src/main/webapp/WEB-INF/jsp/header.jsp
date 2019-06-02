@@ -2,7 +2,9 @@
 <header>
 	<p>
 		<span><a href="./app/main">홈</a></span> | <span><a href="./app/members">회원목록</a></span>
-		| <span><a href="./app/list">게시판</a></span> |
+		| <span><a href="./app/list">게시판</a></span> | <span><a
+			href="./app/letter/mailReceiver">받은편지함</a></span> | <span><a
+href="./app/letter/mailSend">보낸편지함</a></span> |
 		<c:choose>
 			<c:when test="${!empty sessionScope.MEMBER }">
 				<span><a href="./app/member/memberinfo">${MEMBER.name }</a></span> | 

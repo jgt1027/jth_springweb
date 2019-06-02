@@ -4,7 +4,7 @@
 <html>
 <head>
 <base href="${pageContext.request.contextPath }/" />
-<title>회원 목록</title>
+<title> 목록</title>
 </head>
 <body>
 <%@include file ="/WEB-INF/jsp/header.jsp" %>
